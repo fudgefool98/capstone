@@ -73,6 +73,7 @@ else{
     exit;   
 }
 if ($conn->query($sql) === TRUE) {
+    //I WANT TO SET 'user' TO THE ID NOT THE EMAIL HOW??? ANOTHER QUERY? HOW DO I ENSURE UNIQUENESS???
      $_SESSION['user'] = $email;
      header('Location: signupPage.php');
      //^^ WILL SEND TO HOME PAGE WITH USER LOGGED IN

@@ -14,16 +14,11 @@ session_start();
         
         body{
             background-image: url("../../images/Background2.png");
-            height: ; 
+            height: 100%; 
             background-position: center;
             background-repeat: no-repeat;
+/*            background-size: auto 1000px, auto, auto;*/
             background-size: cover;
-        }
-        #img.source-image {
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
         }
         html,body{
             position: relative;
