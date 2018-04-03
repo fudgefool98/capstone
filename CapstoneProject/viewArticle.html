@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Article</title>
+        <title>Content Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -26,13 +26,22 @@
                 height: 55px;
             }
             .image{
+                height: auto;
+                width: auto;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
                 
             }
             .articleLinks{
                 width: 220px;
+                
             }
             .authorDiv{
                 background-color: #5680E9;
+            }
+            .text{
+                text-align: center;
             }
         </style>
     </head>
@@ -41,12 +50,17 @@
         <nav class="navbar navbar-inverse navColor menuDiv">
           <div class="container-fluid ">
             <div class="navbar-header">
+            <a  href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/mainAnon.html">
                 <img class="fandomdb" src="../images/FandomDBCropped.png" alt="FDB">
+            </a>
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="#">Home</a></li>
-                <li><a href="#" class="navWords">Go Back</a></li>
+              <li><a href="#">Fandoms</a></li>
+                <li><a href="#" class="navWords">Creators</a></li>
             </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                </ul> 
           </div>
         </nav>
 
@@ -54,97 +68,66 @@
         </section>
         <section class="post-content-section">
             <div class="container">
-
                 <div class="row">
-<!--
-                    <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
-
-                        <h1 class="text-center">Article Title</h1>
-                        <ul class="list-inline text-center">
-                            <li>
-                                <a href = "http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/userProfile.html" >Author  </a> |
-                            </li>
-                            <li>Fandom |</li>
-                            <li>Date |</li>
-                        </ul>
-                    </div>
--->
                     <div class="col-lg-9 col-md-9 col-sm-12">
                         <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
-
-                            <h1 class="text-center">Article Title</h1>
+                            
+<!--                            Title will be populated from php fetched from create content pages-->
+                            <h1 class="text-center">Title</h1>
                             <ul class="list-inline text-center">
-                                <li><a href = "http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/userProfile.html">Author Name goes here</a>|</li>
-                                <li>
-                                    Specific Fandom title goes here|</li>
-                                <li>Date|</li>
+                                
+<!--                                Auther Name, Fandom, and Date will be fetched from php of create content as well-->
+                                <li class="text">Author Name</li>|
+                                <li class="text">Specific Fandom</li>|
+                                <li class="text">Date</li>
                             </ul>
                         </div>
-                        
-                        <div class="image-block image">
-                             <img src="https://static.pexels.com/photos/268455/pexels-photo-268455.jpeg" class="img-responsive">
+                        <div class="image-block">
+                            <div>
+<!--                  the image/video/picture will go here from whatever the creator uploads from content creation page-->
+                                 <img src="../images/blankImage.png" class="img-responsive image">
+                            </div>
                         </div>
                         <div>
-                            <p class="lead">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
-                            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.</p>
+<!--                    Words from the create content page is here. Words for article or caption... Whichever, if there is not                             caption or article from the creator this should be left blank-->
+                            <p class="lead">Content Words will go here!</p>
                         </div>
                      </div>
                     <div class="col-lg-3  col-md-3 col-sm-12">
                         <div class="well authorDiv">
+                            <h2>About Author</h2>
+                            <img src="" class="img-rounded" />
+<!--                            a little blurb from the authurs bio here-->
+                            <p>Authur info goes here</p>
+                            
+<!--                            button below should take you to the users profile-->
+                            <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Development/JordanPhp/userProfile.php" class="btn btn-default">Read more</a>
+                        </div>
+                        <div class="well authorDiv">
+                            
+<!--                            more content from the creator-->
                             <h3>More by This Author</h3>
                             <div class="input-group">
                                 <div class="list-group articleLinks">
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
                                 </div>
                             </div>
                         </div>
                         <div class="well authorDiv">
+<!--                            more content within this fandom-->
                             <h3>More in This Fandom</h3>
                             <div class="input-group">
                                 <div class="list-group articleLinks">
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
-                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Article Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
+                                    <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="well authorDiv">
-                            <h2>About Author</h2>
-                            <img src="" class="img-rounded" />
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-                            <a href="#" class="btn btn-default">Read more</a>
-                        </div>
-                        <div class="well">
-                            <h2>Share love</h2>
-                            <ul class="list-inline">
-                                <li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></li>
-                                <li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></li>
-                                <li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></li>
-                                <li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></li>
-
-                            </ul>
-                        </div>
-                        <div class="well">
-                            <h2>About Author</h2>
-                            <img src="" class="img-rounded" />
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-                            <a href="#" class="btn btn-default">Read more</a>
-                        </div>
-                        <div class="list-group">
-                            <a class="list-group-item active" href="#"> <h4 class="list-group-item-heading">List group item heading</h4> <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> </a>
-                            <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">List group item heading</h4> <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> </a>
-                            <a class="list-group-item" href="#"> <h4 class="list-group-item-heading">List group item heading</h4> <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p> </a> </div>
-                        <div class="well">
-                            <div class="media"> <div class="media-left"> <a href="#"> <img data-src="holder.js/64x64" class="media-object" alt="64x64" style="width: 64px; height: 64px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTY5MjIxZTM1NSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NjkyMjFlMzU1Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true"> </a> </div> <div class="media-body"> <h4 class="media-heading">Media heading</h4> Cras sit amet nibh libero, in gravida nulla.</div> </div>
-                            <div class="media"> <div class="media-left"> <a href="#"> <img data-src="holder.js/64x64" class="media-object" alt="64x64" style="width: 64px; height: 64px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTY5MjIxZTM1NSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NjkyMjFlMzU1Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true"> </a> </div> <div class="media-body"> <h4 class="media-heading">Media heading</h4> Cras sit amet nibh libero, in gravida nulla.</div> </div>
-                            <div class="media"> <div class="media-left"> <a href="#"> <img data-src="holder.js/64x64" class="media-object" alt="64x64" style="width: 64px; height: 64px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNTY5MjIxZTM1NSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1NjkyMjFlMzU1Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMi41IiB5PSIzNi44Ij42NHg2NDwvdGV4dD48L2c+PC9nPjwvc3ZnPg==" data-holder-rendered="true"> </a> </div> <div class="media-body"> <h4 class="media-heading">Media heading</h4> Cras sit amet nibh libero, in gravida nulla.</div> </div>
-                        </div>
                     </div>
                 </div>
-
-
             </div> <!-- /container -->
         </section>
       

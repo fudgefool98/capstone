@@ -1,5 +1,8 @@
 <?php
 
+    session_destroy();
+    session_start();
+
     if ($_SERVER['REQUEST_METHOD'] == "POST"){
         // Run your function
         Login();
@@ -21,14 +24,18 @@
         
         if($userCheck === TRUE){
              //Start a session
-            session_start();
             //save session
+            mysqli_close($link);
             $_SESSION['login'] = true;
             $_SESSION['name'] = $username;
-            header('Location: mainAnon.html');
+            //header('Location: ../../CapstoneProject/main.html');
+            header('Location: ../../CapstoneProject/editProfile.php');
             exit;
         }else {
-        	//throw error 
+            unset($_SESSION["errorMessage"]);
+        	 $_SESSION["errorMessage"] = "There was an issue Logging in!";
+            header('Location: ../../CapstoneProject/loginPage.php');
+            mysqli_close($link);
         }
     }
     function DBCheck($username,$password){
@@ -52,9 +59,9 @@
         $results = mysqli_query($link, $userQuery) or die(mysqli_error());
         
         if(is_null($results)){
-            echo("DBCheck failed: 76 <br>");
-            print "Error: " . $userQuery . "<br>" . $link->error;
-            return false;
+            unset($_SESSION["errorMessage"]);
+        	 $_SESSION["errorMessage"] = "We had some trouble finding your account.";
+            header('Location: ../../CapstoneProject/loginPage.php');
         }
         while($row = mysqli_fetch_assoc($results)){
             foreach($row as $cname => $cvalue){
@@ -70,7 +77,9 @@
         $passwordVerification = password_verify($password, $result);
         
         if($passwordVerification === FALSE){
-            return false;
+            unset($_SESSION["errorMessage"]);
+        	 $_SESSION["errorMessage"] = "Your username or password is incorrect";
+            header('Location: ../../CapstoneProject/loginPage.php');
         }
         
        return true;

@@ -12,12 +12,11 @@ session_start();
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
         
-        body{
+      body{
             background-image: url("../../images/Background2.png");
             height: 100%; 
             background-position: center;
             background-repeat: no-repeat;
-/*            background-size: auto 1000px, auto, auto;*/
             background-size: cover;
         }
         html,body{
@@ -289,21 +288,22 @@ session_start();
     unset($_SESSION['message']);
 }
     ?>
-                            <div class="form-box">
-                                <form action="signup.php" method="post">
-                                <p class="createAccount">Create an Account:</p>
-                                <input name="user" type="text" placeholder="First Name">
-                                <input name="user" type="text" placeholder="Last Name">
-                                <input name="user" type="email" placeholder="e-mail">
-                                <input placeholder="Birthday" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
-                                <input type="password" placeholder="password">
-                                <input type="password" placeholder="confirm password">
-                                <button class="btn btn-info btn-block login" type="submit">Create Account</button>
-                            </form>
-                                
-                                <br>
-                                <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/loginPage.html" class="login">Already have an Account?</a>
-                            </div>
+                        <div class="form-box">
+                            <form action="signup.php" method="post">
+                            <p class="createAccount">Create an Account:</p>
+                            <input name="firstName" type="text" placeholder="First Name">
+                            <input name="lastName" type="text" placeholder="Last Name">
+                            <input name="username" type="text" placeholder="Username">
+                            <input name="email" type="email" placeholder="e-mail">
+                            <input name="birthday" placeholder="Birthday" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+                            <input name="password" type="password" placeholder="password">
+                            <input name="passwordConfirmation" type="password" placeholder="confirm password">
+                            <button class="btn btn-info btn-block login" type="submit">Create Account</button>
+                        </form>
+
+                            <br>
+                            <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/loginPage.html" class="login">Already have an Account?</a>
+                        </div>
                 </div>
             </div>
             <div class="column middle">

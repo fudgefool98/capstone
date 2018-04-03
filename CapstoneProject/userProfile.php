@@ -124,6 +124,9 @@
           <li><a href="#">Home</a></li>
             <li><a href="#" class="navWords">Go Back</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>  
       </div>
     </nav>
 <!--        script for tabs-->
@@ -150,9 +153,9 @@
         <div class="container-fluid header">
           <div class="row">
             <div class="fb-profile">
-                <img align="left" class="fb-image-lg" src="images/FandomDBCropped.png" alt="Profile image example"/>
+                <img align="left" class="fb-image-lg" src="../images/FandomDBCropped.png" alt="Profile image example"/>
                 <div>
-                <img align="left" class="fb-image-profile thumbnail profilePic" src="images/blankUser.png" alt="Profile image example"/>
+                <img align="left" class="fb-image-profile thumbnail profilePic" src="../images/blankUser.png" alt="Profile image example"/>
                 </div>
                 <div class="fb-profile-text">
                     <h1>User Profile</h1>

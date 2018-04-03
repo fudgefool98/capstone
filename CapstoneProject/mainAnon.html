@@ -20,7 +20,10 @@
 <html>
 <head>
 <title>IT4970</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     
     <style>
 
@@ -42,24 +45,89 @@
         .menuDiv{
             height: 51px;
         }
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;    
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    
 
     </style>
     
 </head>
-<body>   
+<body>  
     <!-- NAV BAR -->
 
     <nav class="navbar navbar-inverse navColor menuDiv">
       <div class="container-fluid ">
         <div class="navbar-header">
-            <img src="images/FandomDBCropped.png" alt="FDB">
+            <a  href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/mainAnon.html">
+            <img class="fandomdb" src="../../images/FandomDBCropped.png" alt="FDB">
+            </a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#" class="navWords">Page 1</a></li>
-          <li><a href="#" class="navWords">Page 2</a></li>
-          <li><a href="#" class="navWords">Page 3</a></li>
-            </ul>
+<!--          <li class="active"><a href="#">Home</a></li>-->
+<!--          <li><a href="#" class="navWords">Fandoms</a></li>-->
+            <div class="dropdown">
+                <li><button class="dropbtn" >Fandoms <i class="fa fa-caret-down"></i></button></li>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="#">All Fandoms</a>
+                    <a href="#">Trending Now</a>
+                    <a href="#">My Fandoms</a>
+                </div>
+            </div>
+            <li><a href="#" class="navWords">Creators</a></li>
+<!--          <li><a href="#" class="navWords">Page 3</a></li>-->
+        </ul>
 <!--
         if NOT logged in   
         <ul class="nav navbar-nav navbar-right">
@@ -68,8 +136,8 @@
 -->
             <!--        if logged in-->  
             <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span> <!--php for the user's name goes here "user profile" is temporary-->User Profile</a></li>
-      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span> <!--php for the user's name goes here "user profile" is temporary-->Sign Up Here!</a></li>
+      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>   
       </div>
     </nav>
