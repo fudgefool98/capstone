@@ -57,8 +57,8 @@
                 <img class="fandomdb" src="../images/FandomDBCropped.png" alt="FDB">
             </div>
             <ul class="nav navbar-nav">
-              <li><a href="#">Home</a></li>
-                <li><a href="#" class="navWords">Go Back</a></li>
+              <li><a href="main.html">Home</a></li>
+                <li><a href="../Development/JordanPhp/userProfile.php" class="navWords">Go Back</a></li>
             </ul>
           </div>
         </nav>

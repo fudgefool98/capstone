@@ -219,7 +219,7 @@ session_start();
             </div>
             <div class="form-box">
                 <form action="../Development/AbdulPhp/loginService.php" method="post">
-                    <input name="username" type="text" placeholder="username">
+                    <input name="username" type="text" placeholder="email">
                     <input name="password" type="password" placeholder="password">
                     <button class="btn btn-info btn-block login lButton" type="submit" name="submit" >Login</button>
                 </form>

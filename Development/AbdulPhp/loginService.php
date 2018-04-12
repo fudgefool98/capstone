@@ -1,6 +1,6 @@
 <?php
 
-    session_destroy();
+    //session_destroy();
     session_start();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -28,8 +28,8 @@
             mysqli_close($link);
             $_SESSION['login'] = true;
             $_SESSION['name'] = $username;
-            //header('Location: ../../CapstoneProject/main.html');
-            header('Location: ../../CapstoneProject/editProfile.php');
+            $_SESSION['errorMessage'] = null;
+            header('Location: ../../CapstoneProject/main.php');
             exit;
         }else {
             unset($_SESSION["errorMessage"]);
@@ -58,7 +58,7 @@
         
         $results = mysqli_query($link, $userQuery) or die(mysqli_error());
         
-        if(is_null($results)){
+        if(is_null($results) || empty($results)){
             unset($_SESSION["errorMessage"]);
         	 $_SESSION["errorMessage"] = "We had some trouble finding your account.";
             header('Location: ../../CapstoneProject/loginPage.php');
@@ -76,13 +76,15 @@
         
         $passwordVerification = password_verify($password, $result);
         
-        if($passwordVerification === FALSE){
+        if($passwordVerification == FALSE){
             unset($_SESSION["errorMessage"]);
         	 $_SESSION["errorMessage"] = "Your username or password is incorrect";
             header('Location: ../../CapstoneProject/loginPage.php');
         }
-        
-       return true;
+        if($passwordVerification == TRUE){
+            return true;
+        }
+       return false;
     }
 
 ?>

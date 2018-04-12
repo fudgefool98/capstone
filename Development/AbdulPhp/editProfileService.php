@@ -20,7 +20,7 @@ if($link -> connect_error) {
     return false;
 }
 //pull all data from user already in DB then if changed upsert to db again with new and current info not changed
-$query = "SELECT * FROM User WHERE email= '$usr'";
+$query = "SELECT * FROM User WHERE email = '$usr'";
 
 $result = mysqli_query($link, $query) or die (mysqli_error());
 $row = mysqli_fetch_row($result);
@@ -38,14 +38,6 @@ $instagram = "";
 $snapchat = "";
 
 //set variables to values in DB unless changed on front end then change values and upsert everything
-//change logic
-//$i = 0;
-
-//if(!empty($_POST['fname'])){
-//    $_SESSION['firstName'] = "I made it to the switch in fname: fname is emtpy " + .$_POST['firstName'].;
-//    echo "{$_SESSION['firstName']}";
-//}
-//
 if(empty($_POST['email'])){
     $email = $row[1];
 }else{
@@ -70,7 +62,7 @@ if(empty($_POST['lname'])){
 if(empty($_POST['password'])){
     $password = row[5];
 }else{
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 }
 if(empty($_POST['about'])){
     $about = $row[6];
@@ -102,53 +94,15 @@ if(empty($_POST['snapchat'])){
 }else{
     $snapchat = $_POST['snapchat'];
 }
-
-        
-//switch(true){
-//    case empty($_POST['username']):
-//        $username = $row[1];
-//        break;
-//    case empty($_POST['fname']):
-//        //not hitting this point
-//        $firstName = $row[2];
-//        break;
-//    case empty($_POST['lname']):
-//        $_SESSION['firstName'] = "I made it to the switch in fname: fname is emtpy";
-//        $lastName = $row[3];
-//        break;
-//    case isset($_POST['password']):
-//            //need to test if confirm password is the same on front end
-//        $password = password_hash($password, $PASSWORD_DEFAULT);
-//        break;
-//    case empty($_POST['password']):
-//        $password = $row[5];
-//        break;
-//    case empty($_POST['twitter']):
-//        $twitter = $row[7];
-//        break;
-//    case empty($_POST['facebook']):
-//        $facebook = $row[8];
-//        break;
-//    case empty($_POST['tumblr']):
-//        $tumblr = $row[9];
-//        break;
-//    case empty($_POST['instagram']):
-//        $instagram = $row[10];
-//        break;
-//    case empty($_POST['snapchat']):
-//        $snapchat = $row[11];
-//        break;
-//        
-//}
 //set remaining values to be updated so we can update the whole table at once.
 $userId = $row[0];
 
 $updateQuery = "UPDATE User 
-                SET email = '".$email."', firstName = '".$firstName."', lastName = '".$lastName."', passwordHash = '".$password."', twitter = '".$twitter."', facebook = '".$facebook."', tumblr = '".$tumblr."', instagram = '".$instagram."', snapchat = '".$snapchat."', username = '".$username."' 
+                SET email = '".$email."', firstName = '".$firstName."', lastName = '".$lastName."', passwordHash = '".$password."', about = '".$about."', twitter = '".$twitter."', facebook = '".$facebook."', tumblr = '".$tumblr."', instagram = '".$instagram."', snapchat = '".$snapchat."', username = '".$username."' 
                 WHERE userId = '".$row[0]."' ";
 
 if (mysqli_query($link, $updateQuery)) {
-    $_SESSION["errorMessage"] = "We successfully updated your user '$firstName' UserId = '$row[0]'";//this is the error being thrown
+    $_SESSION["errorMessage"] = "We successfully updated your user";
 } else {
     $_SESSION["errorMessage"] = "Error updating record: " . mysqli_error($link);
 }

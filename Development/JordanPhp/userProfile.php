@@ -1,55 +1,73 @@
 <?php 
+
 /*
 the problems with this document are as follows
 
-#1 as is commented in many places the sql statements aren't completed or the table User's must be altered to include the new rows.
-#2 The function oneResultQuery has not been tested and likely fails to retrive plain text ready to be echoed in the proper locations
-#3 NO IMPLEMENTATION IS DONE FOR THE PROFILE PICTURE!!!!!
-#4 ask about the security of this document
+#1 NO IMPLEMENTATION IS DONE FOR THE PROFILE PICTURE!!!!!
+#2 ask about the security of this document
+#3 surely this should be refactored but it does work.
+#4 might have a bug with logged in user.... but it seems get overrides as is needed
+#5 WORK ON THE LOG IN LOG OUT AND EDIT LINK
 */
 
 // Start the session
 require 'db_credentials.php';
 session_start();
-//for now we force JORDAN as the session var for user id = 40
-$_SESSION['user'] = 40;
-if (!isset($_SESSION['user'])){ 
-    //currently only relocates as i haven't tested signed in
-    //header('Location: loginPage.html');
-    //exit;
-}
-else{
-    $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+$loggedIn = false;
+if (isset($_SESSION['user'])){ 
+    $loggedIn = true;
 }
-$aboutMeSql = "SELECT about FROM User WHERE userID = $_SESSION[user]";
+if(!isset($_GET['user']) && !isset($_SESSION['user'])){
+    header('Location: signupPage.php');
+    exit;
+}
 
-//$WrittenArticlesListSql = "";
-//requires join
-//$favFandomsSql = "";
-//requires join
+if(isset($_GET['user'])){
+$_GET['user'] = $conn->real_escape_string($_GET['user']);    
+$aboutMeSql = "SELECT about FROM User WHERE `username` = '$_GET[user]'";
+$WrittenArticlesListSql = "Select title, authorID From Article, User Where authorID = userId and username = '$_GET[user]'";
+$myfandomsSql = "SELECT fandom, username FROM Article, User, Fandom WHERE authorID = userID and username = '$_GET[user]' and fandom = Fandom.title group by Fandom.title";
+$twitter = "SELECT twitter FROM User Where `username` = '$_GET[user]'";
+$facebook = "SELECT facebook FROM User Where `username` = '$_GET[user]'";
+$instagram = "SELECT instagram FROM User Where `username` = '$_GET[user]'";
+$snapchat = "SELECT snapchat FROM User Where `username` = '$_GET[user]'";
+$tumblr = "SELECT tumblr FROM User Where `username` = '$_GET[user]'";
+$usernameSql = "SELECT username FROM User Where `username` = '$_GET[user]'";
+$birthdaySql = "SELECT birthday FROM User Where `username` = '$_GET[user]'";
+$topFandomSql = "Select Fandom.title 
+From Fandom, Article, User 
+where authorID = userID and username = '$_GET[user]' and fandom = Fandom.title 
+group by Fandom.title 
+order by count(Fandom.title) desc
+limit 1; ";
+$mostRecentArticleSql = "SELECT title FROM Article, User WHERE authorID = userID and username = '$_GET[user]' order by lastEdited desc limit 1";
+}
+else{
+$_SESSION['user'] = $conn->real_escape_string($_SESSION['user']);    
 
-$twitter = "SELECT twitter FROM User Where userID = $_SESSION[user]";
-$facebook = "SELECT facebook FROM User Where userID = $_SESSION[user] ";
-$instagram = "SELECT instagram FROM User Where userID = $_SESSION[user] ";
-$snapchat = "SELECT snapchat FROM User Where userID = $_SESSION[user] ";
-$tumblr = "SELECT tumblr FROM User Where userID = $_SESSION[user] ";
-
-$emailSql = "SELECT email FROM User Where userID = $_SESSION[user]";
-$birthdaySql = "SELECT birthday FROM User Where userID = $_SESSION[user]";
-
-//$topFandomSql = "SELECT ";
-//requires join
-$mostRecentArticleSql = "SELECT title FROM Article WHERE authorID = $_SESSION[user] order by lastEdited desc limit 1";
-//requires join
-
-
-//make sure I am processing the results properly in this function so that it returns the value and only the value of the query desired
-
-//if the value is nullable
+$aboutMeSql = "SELECT about FROM User WHERE `username` = '$_SESSION[user]'";
+$WrittenArticlesListSql = "Select title, authorID From Article, User Where authorID = userId and username = '$_SESSION[user]'";
+$myfandomsSql = "SELECT fandom, username FROM Article, User, Fandom WHERE authorID = userID and username = '$_SESSION[user]' and fandom = Fandom.title group by Fandom.title";
+$twitter = "SELECT twitter FROM User Where `username` = '$_SESSION[user]'";
+$facebook = "SELECT facebook FROM User Where `username` = '$_SESSION[user]'";
+$instagram = "SELECT instagram FROM User Where `username` = '$_SESSION[user]'";
+$snapchat = "SELECT snapchat FROM User Where `username` = '$_SESSION[user]'";
+$tumblr = "SELECT tumblr FROM User Where `username` = '$_SESSION[user]'";
+$usernameSql = "SELECT username FROM User Where `username` = '$_SESSION[user]'";
+$birthdaySql = "SELECT birthday FROM User Where `username` = '$_SESSION[user]'";
+$topFandomSql = "Select Fandom.title 
+From Fandom, Article, User 
+where authorID = userID and username = '$_SESSION[user]' and fandom = Fandom.title 
+group by Fandom.title 
+order by count(Fandom.title) desc
+limit 1; ";
+$mostRecentArticleSql = "SELECT title FROM Article, User WHERE authorID = userID and username = '$_SESSION[user]' order by lastEdited desc limit 1";
+}
 function oneResultQuery($conn,$query){
     if($result = $conn->query($query)){
         $returnThis = $result->fetch_row(); 
@@ -62,44 +80,50 @@ function oneResultQuery($conn,$query){
     }
     else {
         print "Error: " . $query . "<br>" . $conn->error;
-    }
-    
+    }   
 }
 function multipleResultQuery($conn,$query){
     if($result = $conn->query($query)){
-        while ($row = $result->fetch_row()) {
-            $returnThis += $row[0] . "\n";
-        }
-        return $returnThis;
+        return $result;
     }
     else {
         print "Error: " . $query . "<br>" . $conn->error;
     }
-    
 }
 //if the value is non nullable we would like to return a string that says 
 //"This hasn't been set yet, edit your information by clicking Edit User"
-
-
 //these are tabs
 $resultAboutMe = oneResultQuery($conn, $aboutMeSql);
+$resultMyFandoms = multipleResultQuery($conn, $myfandomsSql);
+$myFandomsHTML = '';
 
-//$resultFavFandoms = multipleResultQuery($conn, $favFandomsSql);
-//$resultWrittenArticlesList = multipleResultQuery($conn, $WrittenArticlesListSql);
-
-    //social media
-    $resultTwitter = oneResultQuery($conn, $twitter);
-    $resultFacebook = oneResultQuery($conn, $facebook);
-    $resultInstagram = oneResultQuery($conn, $instagram);
-    $resultSnapchat = oneResultQuery($conn, $snapchat);
-    $resultTumblr = oneResultQuery($conn, $tumblr);
+while ($fandomRow = $resultMyFandoms->fetch_row()) {
+            $myFandomsHTML .= '<dt class="links"><a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Development/JordanPhp/articles.php?title='.$fandomRow[0].'&authorID='.$fandomRow[1].'">'.$fandomRow[0].' </a></dt>';
+}
+if($myFandomsHTML == ''){
+    $myFandomsHTML = 'No information available';
+}
+$resultWrittenArticlesList = multipleResultQuery($conn, $WrittenArticlesListSql);
+$articleListHTML = '';
+while ($articleRow = $resultWrittenArticlesList->fetch_row()) {
+            $articleListHTML .= '<dt class="links"><a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Development/JordanPhp/viewArticle.php?title='.$articleRow[0].'&authorID='.$articleRow[1].'">'.$articleRow[0].' </a></dt>';
+}
+if($articleListHTML == ''){
+    $articleListHTML = 'No information available';
+}
+//social media
+$resultTwitter = oneResultQuery($conn, $twitter);
+$resultFacebook = oneResultQuery($conn, $facebook);
+$resultInstagram = oneResultQuery($conn, $instagram);
+$resultSnapchat = oneResultQuery($conn, $snapchat);
+$resultTumblr = oneResultQuery($conn, $tumblr);
 
 //these are in quick look
-$resultEmail = oneResultQuery($conn, $emailSql);
+$resultusername = oneResultQuery($conn, $usernameSql);
 $resultBirthday = oneResultQuery($conn, $birthdaySql);
 $resultMostRecentArticle = oneResultQuery($conn, $mostRecentArticleSql);
 
-//$resultTopFandom = oneResultQuery($conn, $topFandomSql);
+$resultTopFandom = oneResultQuery($conn, $topFandomSql);
 
 
 $conn->close();
@@ -230,9 +254,19 @@ $conn->close();
             </a>
         </div>
 
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
+        <?php
+  if($loggedIn){
+    echo '<ul class="nav navbar-nav navbar-right">
+              <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span> '.$_SESSION["user"].'</a></li>
+              <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+              </ul>';
+  }
+  else{
+        
+      echo '<ul class="nav navbar-nav navbar-right">
+          <li><a href="#" class="navWords"><span    class="glyphicon glyphicon-user"></span> Sign Up</a>    </li>
+          <li><a href="#" class="navWords"><span    class="glyphicon glyphicon-log-in"></span> Login</a>    </li>';
+  }  ?>
       </div>
     </nav>
 <!--        script for tabs-->
@@ -277,7 +311,7 @@ $conn->close();
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'About')">About Me</button>
                     <button class="tablinks" onclick="openTab(event, 'Articles')">Written Articles</button>
-                    <button class="tablinks" onclick="openTab(event, 'Fandoms')">Favorite Fandoms</button>
+                    <button class="tablinks" onclick="openTab(event, 'Fandoms')">My Fandoms</button>
                     <button class="tablinks" onclick="openTab(event, 'Other')">Social Media</button>
                 </div>
 <!--                  Info within tab-->
@@ -292,13 +326,13 @@ $conn->close();
                     <div id="Articles" class="tabcontent">
                       <h3>Written Articles</h3>
                         <hr>
-                      <p class="words"><?php echo "$resultWrittenArticlesList"; ?></p> 
+                      <p class="words"><?php echo "$articleListHTML"; ?></p> 
                     </div>
 
                     <div id="Fandoms" class="tabcontent">
-                      <h3>Favorite Fandoms</h3>
+                      <h3>My Fandoms</h3>
                         <hr>
-                      <p class="words"><?php echo "$resultFavFandoms"; ?></p>
+                      <p class="words"><?php echo "$myFandomsHTML"; ?></p>
                     </div>
 
                     <div id="Other" class="tabcontent">
@@ -324,19 +358,19 @@ $conn->close();
                     <div class="row">
                         <div class="col-lg-12">
                              <div class="form-group labelColor">
-                                 <label>Username: <?php echo "$resultEmail"; ?></label>
+                                 <label>Username: <?php echo "$resultusername"; ?></label>
                                   <p></p>
                              </div>
                               <div class="form-group labelColor">
-                                  <label for="email">Birthday: <?php echo "$resultBirthday"; ?></label>
+                                  <label for="username">Birthday: <?php echo "$resultBirthday"; ?></label>
                                   <p></p>
                               </div>
                               <div class="form-group labelColor">
-                                  <label for="email">Top Fandom: <?php echo "$resultTopFandom"; ?></label>
+                                  <label for="username">Top Fandom: <?php echo "$resultTopFandom"; ?></label>
                                   <p></p>
                               </div>
                                <div class="form-group labelColor">
-                                  <label for="email">Most Recent Article: <?php echo "$resultMostRecentArticle"; ?></label>
+                                  <label for="username">Most Recent Article: <?php echo "$resultMostRecentArticle"; ?></label>
                                    <p></p>
                                </div>
 

@@ -11,7 +11,17 @@ session_start();
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <style>
-        
+     
+/*
+        #bg{
+            position: fixed;
+            top: 0;
+            left: 0;
+            
+            min-width: 100%;
+            min-height: 100%
+        }
+*/
       body{
             background-image: url("../../images/Background2.png");
             height: 100%; 
@@ -74,17 +84,6 @@ session_start();
               -ms-transform: rotateZ(-2deg);
 
         }
-
-
-/*
-        .avatar{
-            width: 125px;
-            height: 125px;
-            border-radius: 100%;
-            border: 2px solid #aaa;
-            margin: 10px auto 30px;
-        }
-*/
 
 
         .form-box input{
@@ -251,6 +250,7 @@ session_start();
 </head>
 
 <body id="img">
+<!--    <img src="../../images/Background2.png" id="bg" alt="">-->
     <nav class="navbar navbar-inverse navColor menuDiv">
       <div class="container-fluid ">
         <div class="navbar-header">
