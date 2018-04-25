@@ -1,9 +1,20 @@
 <?php
-require('writeArticleService.php');
+     require('../JordanPhp/db_credentials.php');
+        $link = new mysqli($servername, $username, $password, $dbname);  
 
-session_start();
-$fandomList = getFandoms();
-
+    if($link -> connect_error) {
+        die("Connection failed: " . $link->connect_error);
+        return false;
+    }
+    $fandomQuery = "SELECT title FROM Fandom";
+    $fandomResult = mysqli_query($link, $fandomQuery) or die (mysqli_error());
+    $fandoms = array();
+    //loop through list of fandoms and push to the fandoms array.
+    while($row = mysqli_fetch_array($fandomResult, MYSQLI_NUM)){
+        array_push($fandoms, $row);
+    }
+    //return the arraylist of fandoms
+    $fandom = "";
 ?>
 
 <!DOCTYPE html>
@@ -180,88 +191,72 @@ $fandomList = getFandoms();
         </div>
         </div>
         <hr>
-        <form action="" method="post">
-<!--
-        <section class="banner-section">
-        </section>
--->
-<!--        <section class="post-content-section">-->
+        <form action="writeArticleService.php" method="post">
             <div class="container">
-<!--                <div class="row">-->
-<!--                    <div class="col-lg-9 col-md-9 col-sm-12">-->
-                    
-<!--                        <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">-->
-                       
                 <div class="row">
-                <?php
+                    <?php
                     if(isset($_SESSION['articleErrorMessage'])){
                         echo '<div class="alert alert-danger"><p>';
                         echo $_SESSION["articleErrorMessage"];
                         echo "</p></div>";
                         unset($_SESSION['articleErrorMessage']);
                     }
-                ?>
-                    
+                    ?>
             <!-- the div with the Title textbox and upload video -->
-                          <div class="column left">
+                          
+                        <div class="column left">
                             <div>
                             <label for="title">Title</label><br>
-                            <textarea class="form-control z-depth-1 title" id="title" rows="1" cols="45"></textarea>
+                            <textarea class="form-control z-depth-1 title" id="title" name="title" rows="1" cols="45"></textarea>
                             <br><br>
                         </div>
                         <br>
                         <div>
-                            
                             <div class="picture">
-
                                 <label for="pictureUpload">Upload a photo to go with your writing!</label>
                             <input type="file" class="form-control" id="pictureUpload">
                             </div>
                         </div>
                         </div>
-                       
                         <br><br>
-                    
                     <!--  the div for the fandom tag box-->
                         <div class="column right">
                            <div  class="transbox2 well">
                            <h2 class="button">Fandom Tag</h2> 
-                               <form action="">
-                                  <input type="radio" name="fandom" value="fandoms">  
-                                   <label for="sel1">Select an already existing fandom:</label>
-                                          <select class="form-control fandomTag" id="sel1">
-                                            <option><?php ?></option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                          </select><br>
-                                   <input type="radio" name="fandom" value="newfandom">
-                                   <label for="new">Create a new fandom:</label><br>
-                                   <textarea class="form-control z-depth-1 newFan" id="new" rows="1" cols="25"></textarea>
-                                 
-                                </form>
-                           </div>   
-                            
-                        </div>
+                            <!--created fandoms-->
+                              <input type="radio" name="fandom" value="fandoms">  
+                               <label for="sel1">Select an already existing fandom:</label>
+                                      <select name="oldFandom" class="form-control fandomTag" id="sel1">
+                                        <?php 
+                                          foreach($fandoms as $fandom): ?>
+                                            <option value="<?php $fandom[0]; ?>"><?php echo $fandom[0]; ?></option>
+                                        <?php endforeach; ?>
+                                          
+                                          <!--try something else-->  
+                                          
+                                      </select><br>
+                               <!--new fandoms-->
+                               <input type="radio" name="fandom" value="newFandom">
+                               <label for="new">Create a new fandom:</label><br>
+                               <input class="form-control z-depth-1 newFan" id="new" rows="1" cols="25" name="fandomName">
+                               <!--<input type="hidden" name="type" value="text">-->
+                          </div>
+                      </div>
                 </div>
-                <!-- the div with the article text area-->
-                    <div class="form-group shadow-textarea">
-                        <label class="textLabel" for="article">Start Writing!</label>
-                        <textarea class="form-control z-depth-1" id="article" rows="50" placeholder="Write something here..."></textarea>
-                    </div>
-                    <!-- publish button-->
-                        <div class="button">
-                        <p>By hitting submit, you agree that your work is appropriate, professional, and orginal. Anything that goes against these standards will be taken down.</p>
-                        <button class="btn btn-primary" type="submit">Publish</button>
-                        <br><br><br>
-                        </div>
-                     </div>
-         
-<!--                     </div>-->
-<!--
-                    </div>
-        </section>
--->
+
+        <!-- the div with the article text area-->
+            <div class="form-group shadow-textarea">
+                <label class="textLabel" for="article">Start Writing!</label>
+                <textarea class="form-control z-depth-1" id="article" rows="50" placeholder="Write something here..." name = "article"></textarea>
+            </div>
+            <!-- publish button-->
+                <div class="button">
+                <p>By hitting submit, you agree that your work is appropriate, professional, and orginal. Anything that goes against these standards will be taken down.</p>
+                <button class="btn btn-primary" type="submit">Publish</button>
+                <br><br><br>
+                </div>
+
+             </div>
         </form>
     </body>
 </html>

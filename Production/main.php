@@ -51,6 +51,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li><a href="#">Fandoms</a></li>
+                    <li><a href="../Development/AbdulPhp/writeArticle.php" class="navWords">Write Article(testing)</a></li>
                     <li><a href="#" class="navWords">Creators</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

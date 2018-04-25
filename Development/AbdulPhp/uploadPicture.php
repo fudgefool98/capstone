@@ -1,7 +1,26 @@
+<?php
+     require('../JordanPhp/db_credentials.php');
+        $link = new mysqli($servername, $username, $password, $dbname);  
+
+    if($link -> connect_error) {
+        die("Connection failed: " . $link->connect_error);
+        return false;
+    }
+    $fandomQuery = "SELECT title FROM Fandom";
+    $fandomResult = mysqli_query($link, $fandomQuery) or die (mysqli_error());
+    $fandoms = array();
+    //loop through list of fandoms and push to the fandoms array.
+    while($row = mysqli_fetch_array($fandomResult, MYSQLI_NUM)){
+        array_push($fandoms, $row);
+    }
+    //return the arraylist of fandoms
+    $fandom = "";
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Share Video</title>
+        <title>Upload Video</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -30,12 +49,8 @@
             width: auto;
             display: block;
             margin-left: auto;
-            margin-right: auto;   
+            margin-right: auto;
         }
-        .articleLinks{
-            width: 220px;        
-        }
-
         .text{
             text-align: center;
         }
@@ -65,7 +80,7 @@
             font-style: oblique;
             font-weight: bold;
             font-size: 15px;
-            }
+        }
         .top{
             background-image: url(../images/Collage.png);
             background-size: cover;
@@ -74,7 +89,7 @@
             padding: 10px;
             }
         .top h1{
-                color: white;
+            color: white;
             }
         div.transbox{
             background-color: #ffffff;
@@ -89,31 +104,30 @@
             font-weight: bold;
             color: #000000;
         }
-        div.transbox2{
+           div.transbox2{
         background-color: #ffffff;
         opacity: 0.9;
         filter: alpha(opacity=60);
         width: 430px;
         margin: 0 auto;
-        padding: 0px 5px 15px 15px;
+        padding: 1px 5px 15px 15px;
         }
-        
         .shadow-textarea textarea.form-control::placeholder {
             font-weight: 300;
         }
-        
+            
         .shadow-textarea textarea.form-control {
             padding-left: 0.8rem;
         }
                 
-        .video{
-            width: 500px;
-            }
-        
+        .picture{
+             width: 500px;
+        }
+            
         label{
             font-size: 16px;
-            }
-          .column {
+        }
+             .column {
             float: left;
             height: 250px;
         }
@@ -137,9 +151,6 @@
         .newFan{
             width: 400px;
         }
-        h3{
-                font-size: 25px;
-            }
         </style>
     </head>
     <body>
@@ -161,27 +172,17 @@
           </div>
         </nav>
         
-<!--    the top picture and words-->
-     <div class="top"> 
+    <!--    the top picture and words-->
+       <div class="top"> 
         <div class="transbox">
-    <h1 class="words">Upload a Video</h1>
+    <h1 class="words">Share a Drawing</h1>
         </div>
         </div>
         <hr>
         <form action="" method="post">
-<!--
-        <section class="banner-section">
-        </section>
--->
-<!--        <section class="post-content-section">-->
             <div class="container">
-<!--                <div class="row">-->
-<!--                    <div class="col-lg-9 col-md-9 col-sm-12">-->
-                    
-<!--                        <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">-->
-                      <div class="row">
-                          
-                    <!-- the div with the Title textbox and upload video -->
+                          <div class="row">
+<!--      the div with the Title textbox and upload video -->
                           <div class="column left">
                             <div>
                             <label for="title">Title</label><br>
@@ -191,47 +192,46 @@
                         <br>
                         <div>
                             
-                            <div class="video">
+                            <div class="picture">
 
-                                <label for="pictureUpload">Upload your video here!</label>
+                                <label for="pictureUpload">Upload your drawing here!</label>
                             <input type="file" class="form-control" id="pictureUpload">
                             </div>
                         </div>
                         </div>
                        
                         <br><br>
-                          
-                    <!-- the div for the fandom tag box-->
+                              
+                    <!--  the div for the fandom tag box-->
                         <div class="column right">
                            <div  class="transbox2 well">
-                           <h3 class="button">Fandom Tag</h3> 
+                           <h2 class="button">Fandom Tag</h2> 
                                <form action="">
                                   <input type="radio" name="fandom" value="fandoms">  
-                                   <label for="sel1">Select an already existing fandom:</label>
+                                   <label for="sel1">Select an already existing fandom</label>
                                           <select class="form-control fandomTag" id="sel1">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                          </select><br>
+                                        <?php 
+                                          foreach($fandoms as $fandom): ?>
+                                            <option name="oldFandom" value="<?php $fandom[0]; ?>"><?php echo $fandom[0]; ?></option>
+                                        <?php endforeach; ?>
+                                      </select><br>
                                    <input type="radio" name="fandom" value="newfandom">
                                    <label for="new">Create a new fandom:</label><br>
                                    <textarea class="form-control z-depth-1 newFan" id="new" rows="1" cols="25"></textarea>
-                                 
+                                    <input type="hidden" name="type" value="picture">
                                 </form>
                            </div>   
                             
                         </div>
                 </div>
-                
                 <!-- the div with the description text area-->
-                    <div class="form-group shadow-textarea">
-                        <label for="videoDescription">Description of Video</label>
-                        <textarea class="form-control z-depth-1" id="videoDescription" rows="10" placeholder="Write something here..."></textarea>
+                       <div class="form-group shadow-textarea">
+                        <label for="pictureDescription">Description of Drawing</label>
+                        <textarea class="form-control z-depth-1" id="pictureDescription" rows="10" placeholder="Write something here..."></textarea>
                     </div>
                 
                 <!-- publish button-->
-                    <div class="button">
+                        <div class="button">
                         <p>By hitting submit, you agree that your work is appropriate, professional, and orginal. Anything that goes against these standards will be taken down.</p>
                         <button class="btn btn-primary" type="submit">Publish</button>
                         <br><br><br>

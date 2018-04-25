@@ -20,7 +20,7 @@ $fandomListSQL = "SELECT title FROM Fandom";
 $fandomList = multipleResultQuery($conn,$fandomListSQL);
 $htmlList = '';
 while ($row = $fandomList->fetch_row()) {
-            $htmlList .= '<dt class="links"><a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/articles.php?title='.$row[0].'">'.$row[0].' </a></dt>';
+            $htmlList .= '<dt class="links"><a href="http://www.fandomdb.com/Production/articles.php?title='.$row[0].'">'.$row[0].' </a></dt>';
         }
 
 
@@ -28,34 +28,33 @@ while ($row = $fandomList->fetch_row()) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>IT4970</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Our Fandoms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="navbar.css">
+
+    
     
     <style>
-
-        .navColor{
-            background-color: #84CEEB;
-            border-color:#84CEEB;
-            color: black;
-        }
-        
-        .navWords{
-            color: black;
-        }
-        img{
+        .fandomdb{
             height: 50px;
-            width: 200px;
+            width: 250px;
             padding-right: 10px;
 
         }
-        .menuDiv{
-            height: 51px;
+        span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8860D0;
         }
+        
         .pageContent{
             background-color: #C1C8EA;
+            text-align: center;
         }
         h2{
-            margin-left: 40px;
+            font-size: 50px;
+            font-weight: bold;
+            font-family: sans-serif;
         }
         .links{
             margin: 30px;
@@ -88,25 +87,27 @@ while ($row = $fandomList->fetch_row()) {
           text-decoration: none;
           font-size: 18px;
           color: black;
-          display: block
+          display: block;
         }
 
         #myUL li a:hover:not(.header) {
           color: #8860D0;
+            font-size: 20pt;
+            background-color: #C1C8E4;
+            border-radius: 10px;
+            border: 7px ridge #5AB9EA;
         }
         .fullFandomList{
             text-align: center;
-            width: 1400px;
         }
-        .input{
-            text-align: center;
-        }
+        
+
 
     </style>
     
 </head>
 <body class="pageContent">   
-<?php require 'navBar.php'?>
+    <?php require 'navBar.php'?>
     <div class="fandoms">
         <h2>Our Fandoms</h2>
         <div class="input">

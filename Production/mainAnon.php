@@ -6,9 +6,9 @@ require 'dbConnUserForNav.php';
 ?>
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-    <title>IT4970</title>
+    <title>FandomDB</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,42 +16,9 @@ require 'dbConnUserForNav.php';
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="navbar.css">
 
         <style>
-            body{
-                background-color: #C1C8E4;
-            }
-            .navColor{
-                background-color: #84CEEB;
-                border-color:#C1C8E4;
-                font-size: 14pt;
-            }
-            .fandomdb{
-                height: 50px;
-                width: 250px;
-                padding-right: 10px;
-
-            }
-            .fandomdb:hover {
-                opacity: 0.9;
-                filter: alpha(opacity=100);
-            }
-            .menuDiv{
-                height: 55px;
-            }
-            .rightNavWords {
-                font-size: 12pt;
-            }
-            
-            .latest-product-section {
-                padding-top: 100px;
-                padding-bottom: 100px;
-            }
-            h2 {
-                font-size: 30px;
-            }
-
-
             p {
 
                 font-size: 15px;
@@ -84,11 +51,7 @@ require 'dbConnUserForNav.php';
                 color: #999caa;
                 text-decoration: none;
             }
-            span {
-                font-size: 14px;
-                font-weight: 400;
-                color: #8860D0;
-            }
+            
             .link:active, .link:focus, .link:hover {
                 color: white;
             }
@@ -101,17 +64,29 @@ require 'dbConnUserForNav.php';
                 color: #5680E9;
             }
 
+            .slogan{
+                font-size: 20pt;
+            }
+            #fandomdb{
+/*                text-align: center;*/
+                max-width: 100%;
+            }
 
         </style>
 
     </head>
     <body>  
-        <?php require 'navBar.php'?>
+        
+        <?php
+            require 'navBar.php';
+        ?>
+        
         <div class="container latest-product-section">
                 <div class="row text-center margin-b-40">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <h2>Latest Products</h2>
-                        <p>A Platform for the fans byt the fans! Start creating and reading about your favorite Fandoms today!</p>
+                        <p class="slogan">A Platform for the fans by the fans! Start creating and reading about your favorite Fandoms today!</p>
+                        
+                        <h3>Latest Products</h3>
                     </div>
                 </div>
                 <!--// end row -->

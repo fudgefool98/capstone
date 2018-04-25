@@ -61,7 +61,7 @@ $authorsArticlesListSql = "Select title, authorID From Article, User Where autho
 $authorsArticlesListResult = multipleResultQuery($conn, $authorsArticlesListSql);
 $authorsArticlesHTML = '';
 while ($authorRow = $authorsArticlesListResult->fetch_row()) {
-            $authorsArticlesHTML .= '<a class="list-group-item" href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/viewArticle.php?title='.$authorRow[0].'&authorID='.$authorRow[1].'"><h4 class="list-group-item-heading">'.$authorRow[0].'</h4> <p class="list-group-item-text"></p></a>';
+            $authorsArticlesHTML .= '<a class="list-group-item" href="http://www.fandomdb.com/Production/viewArticle.php?title='.$authorRow[0].'&authorID='.$authorRow[1].'"><h4 class="list-group-item-heading">'.$authorRow[0].'</h4> <p class="list-group-item-text"></p></a>';
 }
     //<a class="list-group-item" href="#"> <h4 class="list-group-item-heading">Content Title Here</h4> <p class="list-group-item-text"></p> </a>
     
@@ -69,7 +69,7 @@ $fandomArticlesListSql = "Select Article.title, authorID From Article, Fandom Wh
 $fandomArticlesResult = multipleResultQuery($conn, $fandomArticlesListSql);
 $articleListHTML = '';
 while ($articleRow = $fandomArticlesResult->fetch_row()) {
-            $articleListHTML .= '<a class="list-group-item" href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/viewArticle.php?title='.$articleRow[0].'&authorID='.$articleRow[1].'"><h4 class="list-group-item-heading">'.$articleRow[0].'</h4> <p class="list-group-item-text"></p></a>';
+            $articleListHTML .= '<a class="list-group-item" href="http://www.fandomdb.com/Production/viewArticle.php?title='.$articleRow[0].'&authorID='.$articleRow[1].'"><h4 class="list-group-item-heading">'.$articleRow[0].'</h4> <p class="list-group-item-text"></p></a>';
 }
     
 }
@@ -78,29 +78,21 @@ while ($articleRow = $fandomArticlesResult->fetch_row()) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Content Page</title>
+        <title>Articles</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="userPage.css">
-        <style>
-            .navColor{
-                background-color: #84CEEB;
-                border-color:#C1C8E4;
-            }
+        <link rel="stylesheet" type="text/css" href="navbar.css">
 
-            .navWords{
-                color: white;
-            }
+        <style>
+
             .fandomdb{
                 height: 50px;
                 width: 250px;
                 padding-right: 10px;
 
-            }
-            .menuDiv{
-                height: 55px;
             }
             .image{
                 height: auto;
@@ -109,6 +101,11 @@ while ($articleRow = $fandomArticlesResult->fetch_row()) {
                 margin-left: auto;
                 margin-right: auto;
                 
+            }
+            span {
+                font-size: 14px;
+                font-weight: 400;
+                color: #8860D0;
             }
             .articleLinks{
                 width: 220px;
@@ -145,7 +142,7 @@ while ($articleRow = $fandomArticlesResult->fetch_row()) {
                         <div class="image-block">
                             <div>
 <!--                  the image/video/picture will go here from whatever the creator uploads from content creation page-->
-                                 <img src="../images/blankImage.png" class="img-responsive image">
+                                 <img src="images/blankImage.png" class="img-responsive image">
                             </div>
                         </div>
                         <div>
@@ -161,7 +158,7 @@ while ($articleRow = $fandomArticlesResult->fetch_row()) {
                             <p><?php echo $aboutAuthorResult; ?></p>
                             
 <!--                            button below should take you to the users profile-->
-                            <?php echo '<a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/userProfile.php?user='.$authorUsernameResult.'" class="btn btn-default">Author Profile</a>' ?>
+                            <?php echo '<a href="http://www.fandomdb.com/Production/userProfile.php?user='.$authorUsernameResult.'" class="btn btn-default">Author Profile</a>' ?>
                         </div>
                         <div class="well authorDiv">
                             

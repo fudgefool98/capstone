@@ -1,6 +1,6 @@
 <?php
 // Start the session
-session_start();
+require 'loggedInCheck.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +11,11 @@ session_start();
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="navbar.css">
+
     <style>
         body{
-            background-image: url("../images/Background2.png");
+            background-image: url("images/Background2.png");
             height: 100%; 
             background-position: center;
             background-repeat: no-repeat;
@@ -172,37 +174,17 @@ session_start();
             background-color: #8880D0;
             margin-bottom: 10px;
         }
-                 .navColor{
-            background-color: #84CEEB;
-            border-color:#C1C8E4;
-        }
-        
-        .navWords{
-            color: white;
-        }
         .fandomdb{
             height: 50px;
             width: 250px;
             padding-right: 10px;
 
         }
-        .menuDiv{
-            height: 55px;
-        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navColor menuDiv">
-      <div class="container-fluid ">
-        <div class="navbar-header">
-            <a  href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/mainAnon.html">
-            <img class="fandomdb" src="../../images/FandomDBCropped.png" alt="FDB"
-                >
-            </a>
-          </div>
-      </div>
-    </nav>
+<?php require 'navBar.php'?>
     <div class="container">
 	   <div class="login-container">
            <?php
@@ -215,15 +197,15 @@ session_start();
             ?>
             <div id="output"></div>
             <div class="avatar fdb">
-                <img class="image" src="../images/FandomDBLogo.png" alt="FDBLogo">
+                <img class="image" src="images/FandomDBLogo.png" alt="FDBLogo">
             </div>
             <div class="form-box">
-                <form action="../Development/AbdulPhp/loginService.php" method="post">
+                <form action="loginService.php" method="post">
                     <input name="username" type="text" placeholder="email">
                     <input name="password" type="password" placeholder="password">
                     <button class="btn btn-info btn-block login lButton" type="submit" name="submit" >Login</button>
                 </form>
-                <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/signupPage.php" class="createAccount">Don't have an Account?</a>
+                <a href="http://www.fandomdb.com/Production/signupPage.php" class="createAccount">Don't have an Account?</a>
             </div>
         </div>
     </div>

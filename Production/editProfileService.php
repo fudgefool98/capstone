@@ -30,7 +30,8 @@ $username = "";
 $firstName = "";
 $lastName = "";
 $about = "";
-$password = "";
+$password = $_POST['password'];
+$confirmPassword = $_POST['confirmPassword'];
 $twitter = "";
 $facebook = "";
 $tumblr = "";
@@ -59,10 +60,11 @@ if(empty($_POST['lname'])){
     $lastName = $_POST['lname'];
 }
 //TODO: password hash is being nullified fix it!!!!!!!!!!!!
-if(empty($_POST['password'])){
-    $password = row[5];
+if(empty($_POST['password']) || $confirmPassword !== $password){
+    $hashedPassword = row[5];
 }else{
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 }
 if(empty($_POST['about'])){
     $about = $row[6];
@@ -98,16 +100,15 @@ if(empty($_POST['snapchat'])){
 $userId = $row[0];
 
 $updateQuery = "UPDATE User 
-                SET email = '".$email."', firstName = '".$firstName."', lastName = '".$lastName."', passwordHash = '".$password."', about = '".$about."', twitter = '".$twitter."', facebook = '".$facebook."', tumblr = '".$tumblr."', instagram = '".$instagram."', snapchat = '".$snapchat."', username = '".$username."' 
+                SET email = '".$email."', firstName = '".$firstName."', lastName = '".$lastName."', about = '".$about."', twitter = '".$twitter."', passwordHash = '".$hashedPassword."', facebook = '".$facebook."', tumblr = '".$tumblr."', instagram = '".$instagram."', snapchat = '".$snapchat."', username = '".$username."' 
                 WHERE userId = '".$row[0]."' ";
 
 if (mysqli_query($link, $updateQuery)) {
-    $_SESSION["errorMessage"] = "We successfully updated your user";
+    $_SESSION["errorMessage"] = "We successfully updated your user '$about' --- '$password' ";
 } else {
     $_SESSION["errorMessage"] = "Error updating record: " . mysqli_error($link);
 }
-
 mysqli_close($link);
 
-header('Location: ../../CapstoneProject/editProfile.php');
+header('Location: editProfile.php');
 ?>

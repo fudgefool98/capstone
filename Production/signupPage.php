@@ -12,23 +12,15 @@ require 'dbConnUserForNav.php';
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="navbar.css">
     <style>
      
-/*
-        #bg{
-            position: fixed;
-            top: 0;
-            left: 0;
-            
-            min-width: 100%;
-            min-height: 100%
-        }
-*/
+
       body{
-            background-image: url("../../images/Background2.png");
+            background-image: url("images/Background2.png");
             height: 100%; 
             background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: repeat;
             background-size: cover;
         }
         html,body{
@@ -38,13 +30,14 @@ require 'dbConnUserForNav.php';
 
         .login-container{
             position: relative;
-            width: 300px;
-            margin: 50px 0px 0px 300px;
-            padding: 20px 40px 40px;
+            width: 75%;
+/*            margin: 50px 0px 0px 300px;*/
+            padding: 10px 40px 20px;
             text-align: center;
 /*            background: #fff;*/
             background: #84CEEB;
             border: 1px solid #ccc;
+            
         }
 
         #output{
@@ -60,6 +53,7 @@ require 'dbConnUserForNav.php';
         }
 
         #output.alert-danger{
+           margin-top: 5px;
             background: rgb(228, 105, 105);
         }
 
@@ -67,8 +61,10 @@ require 'dbConnUserForNav.php';
         .login-container::before,.login-container::after{
             content: "";
             position: absolute;
-            width: 100%;height: 100%;
-            top: 3.5px;left: 0;
+            width: 100%;
+            height: 100%;
+            top: 3.5px;
+            left: 0;
             background: #fff;
             z-index: -1;
             -webkit-transform: rotateZ(4deg);
@@ -162,11 +158,11 @@ require 'dbConnUserForNav.php';
         }
         
         .logo{
-            width: 125px;
-            height: 125px;
+            width: 90px;
+            height: 90px;
             border-radius: 100%;
             border: 2px solid #aaa;
-            margin: 10px auto 30px;
+/*            margin: 10px auto 30px;*/
         }
 
         .lButton{
@@ -174,22 +170,11 @@ require 'dbConnUserForNav.php';
             margin-bottom: 10px;
         }
         
-         .navColor{
-            background-color: #84CEEB;
-            border-color:#C1C8E4;
-        }
-        
-        .navWords{
-            color: white;
-        }
         .fandomdb{
             height: 50px;
             width: 250px;
             padding-right: 10px;
 
-        }
-        .menuDiv{
-            height: 55px;
         }
 
         .createAccount {
@@ -212,27 +197,25 @@ require 'dbConnUserForNav.php';
         }
         
         .column {
-            float: left;
             height: 300px;
+            padding-left: 200px;
+            padding-top: 35px;
+            padding-right: 50px;
         }
+        
         .row:after {
             content: "";
             display: table;
             clear: both;
         }
         .left {
-            width: 40%;
-            padding: 150px 0px 0px 0px;
+            padding: 130px 0px 0px 0px;
+           
         }
         
-        .middle{
-            width: 10%
-            padding: 150px 0px 0px 0px;
-            
-        }
-        
+    
         .right {
-            width: 50%;
+            width: 100%;
         }
         
         div.transbox{
@@ -247,16 +230,20 @@ require 'dbConnUserForNav.php';
             font-weight: bold;
             color: #000000
         }
+         span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8860D0;
+        }
 
     </style>
 </head>
 
-<body id="img">
-<!--    <img src="../../images/Background2.png" id="bg" alt="">-->
+<body>
 <?php require 'navBar.php'?>
-        <div class="container">
-            <div class="row">
-                <div class="column left"> 
+        <div class="container img-responsive">
+            <div class="row justify-content-between">
+                <div class="col-sm-5 left column"> 
                     <div class="transbox">
                         <h1 class="message">SHARE YOUR ART</h1>
                         <h1 class="message">CUSTOMIZE YOUR FEED</h1>
@@ -266,11 +253,12 @@ require 'dbConnUserForNav.php';
             
                     </div>
                 </div>
-            <div class="column right">   
+            
+            <div class="col-sm-7 column">   
                 <div class="login-container">
                     <div id="output"></div>
                         <div class="avatar fdb">
-                            <img class="logo" src="../../images/FandomDBLogo.png" alt="FDBLogo">
+                            <img class="logo" src="images/FandomDBLogo.png" alt="FDBLogo">
                         </div>
                     <?php
     if (isset($_SESSION['message']))
@@ -298,9 +286,6 @@ require 'dbConnUserForNav.php';
                             <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/loginPage.html" class="login">Already have an Account?</a>
                         </div>
                 </div>
-            </div>
-            <div class="column middle">
-            
             </div>
         </div>
         </div>

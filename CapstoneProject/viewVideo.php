@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,6 +78,14 @@
         <section class="post-content-section">
             <div class="container">
                 <div class="row">
+                    <?php
+                        if(isset($_SESSION['articleErrorMessage'])){
+                            echo '<div class="alert alert-danger"><p>';
+                            echo $_SESSION["articleErrorMessage"];
+                            echo "</p></div>";
+                            unset($_SESSION['articleErrorMessage']);
+                        }
+                    ?>
                     <div class="col-lg-9 col-md-9 col-sm-12">
                         <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
                             

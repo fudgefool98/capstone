@@ -11,6 +11,7 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="userPage.css">
+        <link rel="stylesheet" type="text/css" href="navbar.css">
         <style>
             .textAreaStyle{
                 border-radius: 5pt;
@@ -28,41 +29,18 @@
                 border-color: #5680E9;
                 color: #5680E9;
             }
-            .navColor{
-                background-color: #84CEEB;
-                border-color:#C1C8E4;
-            }
-
-            .navWords{
-                color: white;
-            }
             .fandomdb{
                 height: 50px;
                 width: 250px;
                 padding-right: 10px;
+            }
 
-            }
-            .menuDiv{
-                height: 55px;
-            }
             
         </style>
     </head>
     
     <body>
-<!--        nav bar at the top-->
-        <nav class="navbar navbar-inverse navColor menuDiv">
-          <div class="container-fluid ">
-            <div class="navbar-header">
-                <img class="fandomdb" src="../images/FandomDBCropped.png" alt="FDB">
-            </div>
-            <ul class="nav navbar-nav">
-              <li><a href="main.html">Home</a></li>
-                <li><a href="../Development/JordanPhp/userProfile.php" class="navWords">Go Back</a></li>
-            </ul>
-          </div>
-        </nav>
-        
+        <?php require 'navBar.php'?>
 <!--        Left of the page that holds photo and upload photo-->
         <div class="container">
         <h1>Edit Profile</h1>
@@ -71,7 +49,7 @@
           <!-- left column -->
           <div class="col-md-3">
             <div class="text-center">
-              <img class="blankUserPic" src="../images/blankUser.png" class="avatar img-circle" alt="avatar">
+              <img class="blankUserPic" src="images/blankUser.png" class="avatar img-circle" alt="avatar">
               <h6>Upload a different photo...</h6>
               <input type="file" class="form-control">
             </div>
@@ -118,24 +96,22 @@
               <div class="form-group">
                 <label class="col-lg-3 control-label">Password:</label>
                 <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="password" name="passowrd">
+                  <input class="form-control" type="password" placeholder="password" name="password">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-lg-3 control-label">Confirm Password:</label>
                 <div class="col-lg-8">
-                  <input class="form-control" type="text" placeholder="password" name="confirmPassword">
+                  <input class="form-control" type="password" placeholder="confirm password" name="confirmPassword">
                 </div>
                   <br>
                   <br>
                   <br>
                   <br>
               </div>
-            </form> 
             
             <h3>Profile Setting</h3> 
               <hr>
-            <form class="form-horizontal" action="../Develpment/AbdulPhp/editProfileService.php" role="form" method="post">
               <div class="form-group">
                 <label class="col-md-3 control-label">First Name:</label>
                 <div class="col-md-8">
@@ -198,7 +174,7 @@
               <div class="form-group">
                 <label class="col-md-3 control-label"></label>
                 <div class="col-md-8">
-                    <button type="submit" class="btn btn-primary" formaction="../Development/AbdulPhp/editProfileService.php">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" formaction=" editProfileService.php">Save Changes</button>
                   <span></span>
                   <input type="reset" class="btn btn-default" value="Cancel">
                 </div>

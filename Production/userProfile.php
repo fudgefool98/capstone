@@ -91,7 +91,7 @@ $resultMyFandoms = multipleResultQuery($conn, $myfandomsSql);
 $myFandomsHTML = '';
 
 while ($fandomRow = $resultMyFandoms->fetch_row()) {
-            $myFandomsHTML .= '<dt class="links"><a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/articles.php?title='.$fandomRow[0].'&authorID='.$fandomRow[1].'">'.$fandomRow[0].' </a></dt>';
+            $myFandomsHTML .= '<dt class="links"><a href="http://www.fandomdb.com/Production/articles.php?title='.$fandomRow[0].'&authorID='.$fandomRow[1].'">'.$fandomRow[0].' </a></dt>';
 }
 if($myFandomsHTML == ''){
     $myFandomsHTML = 'No information available';
@@ -99,7 +99,7 @@ if($myFandomsHTML == ''){
 $resultWrittenArticlesList = multipleResultQuery($conn, $WrittenArticlesListSql);
 $articleListHTML = '';
 while ($articleRow = $resultWrittenArticlesList->fetch_row()) {
-            $articleListHTML .= '<dt class="links"><a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/viewArticle.php?title='.$articleRow[0].'&authorID='.$articleRow[1].'">'.$articleRow[0].' </a></dt>';
+            $articleListHTML .= '<dt class="links"><a href="http://www.fandomdb.com/Production/viewArticle.php?title='.$articleRow[0].'&authorID='.$articleRow[1].'">'.$articleRow[0].' </a></dt>';
 }
 if($articleListHTML == ''){
     $articleListHTML = 'No information available';
@@ -131,6 +131,8 @@ $conn->close();
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="userPage.css">
+        <link rel="stylesheet" type="text/css" href="navbar.css">
+
         <style>
             .profilePic{
                 border-radius: 20%;
@@ -212,26 +214,15 @@ $conn->close();
             hr{
                 color: black;
             }
-          .navColor{
-            background-color: #84CEEB;
-            border-color:#C1C8E4;
-        }
-            
-        .navWords{
-            color: white;
-        }
-        .fandomdb{
+
+            .createAccount {
+             font-size: 20px;
+            }
+                    .fandomdb{
             height: 50px;
             width: 250px;
             padding-right: 10px;
 
-        }
-        .menuDiv{
-            height: 55px;
-        }
-
-        .createAccount {
-         font-size: 20px;
         }
             
         </style>
@@ -263,13 +254,13 @@ $conn->close();
         <div class="container-fluid header">
           <div class="row">
             <div class="fb-profile">
-                <img align="left" class="fb-image-lg" src="../../images/FandomDBCropped.png" alt="Profile image example"/>
+                <img align="left" class="fb-image-lg" src="images/FandomDBCropped.png" alt="Profile image example"/>
                 <div>
-                <img align="left" class="fb-image-profile thumbnail profilePic" src="../../images/blankUser.png" alt="Profile image example"/>
+                <img align="left" class="fb-image-profile thumbnail profilePic" src="images/blankUser.png" alt="Profile image example"/>
                 </div>
                 <div class="fb-profile-text">
                     <h1>User Profile</h1><!-- this could be their name-->
-                    <a href="http://ec2-54-208-194-246.compute-1.amazonaws.com/Production/editProfile.html">Edit Profile</a>
+                    <a href="http://www.fandomdb.com/Production/editProfile.html">Edit Profile</a>
                 </div>
             </div>
           </div>

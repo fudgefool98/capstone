@@ -1,25 +1,14 @@
 <!--
 <?php
-// Created by Professor Wergeles for CS2830 at the University of Missouri
-
-	// Every time we want to access $_SESSION, we have to call session_start()
-	if(!session_start()) {
-		header("Location: error.php");
-		exit;
-	}
-	
-	$loggedIn = empty($_SESSION['loggedin']) ? false : $_SESSION['loggedin'];
-    
-	if (!$loggedIn) {
-		header("Location: login.php");
-		exit;
-	}
+require 'db_credentials.php';
+require 'loggedInCheck.php';
+require 'dbConnUserForNav.php';
 ?>
 -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-    <title>IT4970</title>
+    <title>FandomDB</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,43 +16,9 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="navbar.css">
 
         <style>
-            body{
-                background-color: #C1C8E4;
-            }
-            .navColor{
-                background-color: #84CEEB;
-                border-color:#C1C8E4;
-                font-size: 13pt;
-                font-weight: 700;
-            }
-            .fandomdb{
-                height: 50px;
-                width: 250px;
-                padding-right: 10px;
-
-            }
-            .fandomdb:hover {
-                opacity: 0.9;
-                filter: alpha(opacity=100);
-            }
-            .menuDiv{
-                height: 55px;
-            }
-            .rightNavWords {
-                font-size: 12pt;
-            }
-            
-            .latest-product-section {
-                padding-top: 100px;
-                padding-bottom: 100px;
-            }
-            h2 {
-                font-size: 30px;
-            }
-
-
             p {
 
                 font-size: 15px;
@@ -96,11 +51,7 @@
                 color: #999caa;
                 text-decoration: none;
             }
-            span {
-                font-size: 14px;
-                font-weight: 400;
-                color: #8860D0;
-            }
+            
             .link:active, .link:focus, .link:hover {
                 color: white;
             }
@@ -113,36 +64,68 @@
                 color: #5680E9;
             }
 
+            .slogan{
+                font-size: 20pt;
+            }
+            #fandomdb{
+/*                text-align: center;*/
+                max-width: 100%;
+            }
 
         </style>
 
     </head>
     <body>  
-        <!-- NAV BAR -->
-        <nav class="navbar navbar-inverse navColor menuDiv">
-            <div class="container-fluid ">
-                <div class="navbar-header">
-                    <a  href="http://ec2-54-208-194-246.compute-1.amazonaws.com/CapstoneProject/mainAnon.html">
-                        <img class="fandomdb" src="../images/FandomDBCropped.png" alt="FDB">
-                    </a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Fandoms</a></li>
-                    <li><a href="#">Creators</a></li>
-                    <li><a href="#">Create a Post</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="rightNavWords"><span class="glyphicon glyphicon-log-in"></span> Login!</a></li>
-                    <li><a href="#" class="rightNavWords"><span class="glyphicon glyphicon-user"></span> Sign up Here!</a></li>
-                </ul> 
-            </div>
-        </nav>
+        
+        <?php
+            echo '<!-- NAV BAR --> 
+            <nav class="navbar navbar-inverse navColor menuDiv"> 
+                        <div class="container-fluid "> 
+                            <div class="navbar-header"> 
+                                <a  href="http://www.fandomdb.com/Production/mainAnon.php"> 
+                                    <img class="fandomdb img-responsive" src="FandomDBCropped.png" alt="FDB"> 
+                                </a> 
+                            </div> 
+                            <ul class="nav navbar-nav"> 
+                                <li><a class="navWordsLeft navWords" href="http://www.fandomdb.com/Production/fandoms.php"> <span class="glyphicon glyphicon-heart"></span>  Fandoms</a></li> 
+                                <li><a class="navWords" href="http://www.fandomdb.com/Production/creators.php"> <span class="glyphicon glyphicon-user"></span>  Creators</a></li> ';
+
+            if($loggedIn){
+                                          //this href needs to be set
+                echo '<li><a href="#"> <span class="glyphicon glyphicon-edit"></span> Create a Post</a></li> ';
+            }
+
+             echo '</ul> ';
+
+            if($loggedIn){
+            echo '<ul class="nav navbar-nav navbar-right"> 
+            //        question
+                      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span>';
+                echo $_SESSION['user'];
+
+                echo '</a></li> 
+                      <li><a href="#" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li> 
+                      </ul> ';
+                //still need to handle logout
+            }
+            else{
+
+              echo '<ul class="nav navbar-nav navbar-right"> 
+                  <li><a href="http://www.fandomdb.com/Production/signupPage.php" class="navWords"><span class="glyphicon glyphicon-plus-sign"></span> Sign Up</a></li> 
+                  <li><a href="http://www.fandomdb.com/Production/loginPage.php" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> ';
+                //the above href needs to be set
+            }
+                        echo '</div> 
+                    </nav>
+                    <!-- END NAV BAR --> ';
+        ?>
         
         <div class="container latest-product-section">
                 <div class="row text-center margin-b-40">
                     <div class="col-sm-6 col-sm-offset-3">
-                        <h2>Latest Products</h2>
-                        <p>A Platform for the fans byt the fans! Start creating and reading about your favorite Fandoms today!</p>
+                        <p class="slogan">A Platform for the fans by the fans! Start creating and reading about your favorite Fandoms today!</p>
+                        
+                        <h3>Latest Products</h3>
                     </div>
                 </div>
                 <!--// end row -->

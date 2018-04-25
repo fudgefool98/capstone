@@ -27,14 +27,14 @@
             //save session
             mysqli_close($link);
             $_SESSION['login'] = true;
-            $_SESSION['name'] = $username;
             $_SESSION['errorMessage'] = null;
-            header('Location: ../../CapstoneProject/main.php');
+            $_SESSION['user'] = '$username';
+            header('Location: mainAnon.php');
             exit;
         }else {
             unset($_SESSION["errorMessage"]);
         	 $_SESSION["errorMessage"] = "There was an issue Logging in!";
-            header('Location: ../../CapstoneProject/loginPage.php');
+            header('Location: loginPage.php');
             mysqli_close($link);
         }
     }
@@ -61,7 +61,7 @@
         if(is_null($results) || empty($results)){
             unset($_SESSION["errorMessage"]);
         	 $_SESSION["errorMessage"] = "We had some trouble finding your account.";
-            header('Location: ../../CapstoneProject/loginPage.php');
+            header('Location: loginPage.php');
         }
         while($row = mysqli_fetch_assoc($results)){
             foreach($row as $cname => $cvalue){
@@ -79,7 +79,7 @@
         if($passwordVerification == FALSE){
             unset($_SESSION["errorMessage"]);
         	 $_SESSION["errorMessage"] = "Your username or password is incorrect";
-            header('Location: ../../CapstoneProject/loginPage.php');
+            header('Location: loginPage.php');
         }
         if($passwordVerification == TRUE){
             return true;
