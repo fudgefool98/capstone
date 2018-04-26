@@ -28,7 +28,7 @@
             mysqli_close($link);
             $_SESSION['login'] = true;
             $_SESSION['errorMessage'] = null;
-            $_SESSION['user'] = '$username';
+            $_SESSION['user'] = $username;
             header('Location: mainAnon.php');
             exit;
         }else {
@@ -54,7 +54,7 @@
         $user = mysqli_real_escape_string($link, $username);
         $password = mysqli_real_escape_string($link, $password);
         
-        $userQuery = "SELECT passwordHash FROM User WHERE email = '$username'";
+        $userQuery = "SELECT passwordHash FROM User WHERE username = '$username'";
         
         $results = mysqli_query($link, $userQuery) or die(mysqli_error());
         

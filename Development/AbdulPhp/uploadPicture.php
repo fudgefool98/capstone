@@ -195,7 +195,7 @@
                             <div class="picture">
 
                                 <label for="pictureUpload">Upload your drawing here!</label>
-                            <input type="file" class="form-control" id="pictureUpload">
+                            <input type="file" class="form-control" id="pictureUpload" name="FileName">
                             </div>
                         </div>
                         </div>
@@ -209,10 +209,10 @@
                                <form action="">
                                   <input type="radio" name="fandom" value="fandoms">  
                                    <label for="sel1">Select an already existing fandom</label>
-                                          <select class="form-control fandomTag" id="sel1">
+                                          <select class="form-control fandomTag" id="sel1" name="oldFandom">
                                         <?php 
                                           foreach($fandoms as $fandom): ?>
-                                            <option name="oldFandom" value="<?php $fandom[0]; ?>"><?php echo $fandom[0]; ?></option>
+                                            <option  value="<?php $fandom[0]; ?>"><?php echo $fandom[0]; ?></option>
                                         <?php endforeach; ?>
                                       </select><br>
                                    <input type="radio" name="fandom" value="newfandom">
@@ -227,7 +227,7 @@
                 <!-- the div with the description text area-->
                        <div class="form-group shadow-textarea">
                         <label for="pictureDescription">Description of Drawing</label>
-                        <textarea class="form-control z-depth-1" id="pictureDescription" rows="10" placeholder="Write something here..."></textarea>
+                        <textarea name="description" class="form-control z-depth-1" id="pictureDescription" rows="10" placeholder="Write something here..."></textarea>
                     </div>
                 
                 <!-- publish button-->

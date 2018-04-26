@@ -201,7 +201,7 @@ require 'loggedInCheck.php';
             </div>
             <div class="form-box">
                 <form action="loginService.php" method="post">
-                    <input name="username" type="text" placeholder="email">
+                    <input name="username" type="text" placeholder="username">
                     <input name="password" type="password" placeholder="password">
                     <button class="btn btn-info btn-block login lButton" type="submit" name="submit" >Login</button>
                 </form>

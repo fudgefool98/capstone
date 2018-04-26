@@ -214,7 +214,7 @@
                         <div>
                             <div class="picture">
                                 <label for="pictureUpload">Upload a photo to go with your writing!</label>
-                            <input type="file" class="form-control" id="pictureUpload">
+                            <input type="file" class="form-control" id="pictureUpload" name="FileName">
                             </div>
                         </div>
                         </div>

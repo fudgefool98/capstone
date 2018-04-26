@@ -54,11 +54,6 @@ while ($row = $clickableArticle->fetch_row()) {
             padding-right: 10px;
 
         }
-        span{
-            font-size: 14px;
-            font-weight: 400;
-            color: #8860D0;
-        }
         .pageContent{
             background-color: #C1C8EA;
         }
@@ -81,52 +76,13 @@ while ($row = $clickableArticle->fetch_row()) {
                 }
             ?> Articles</h2>
          
-    
-    
-    
-    
-    
-    <div class="row">
-      <div class="span8">
-        <div class="row">
-          <div class="span8">
-            <h4><strong><a href="#">
-                <ul>
+            <ul>
                     <?php
 
                         echo $htmlList; 
 
                   ?>
-                </ul>
-                </a></strong></h4>
-          </div>
-        </div>
-        <div class="row">
-          <div class="span2">
-            <a href="#" class="thumbnail">
-                <img src="http://placehold.it/260x180" alt="">
-            </a>
-          </div>
-          <div class="span6">      
-            <p>
-              Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
-            </p>
-            <p><a class="btn" href="#">Read more</a></p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="span8">
-            <p></p>
-            <p>
-              <i class="icon-user"></i> by <a href="#">John</a> 
-              | <i class="icon-calendar"></i> Sept 16th, 2012
-
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
+            </ul>
      
      
      

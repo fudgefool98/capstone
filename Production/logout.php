@@ -1,8 +1,9 @@
 <?php
     
 session_start();
+unset($_SESSION['user']);
 session_destroy();
 
-header('Location: ../../CapstoneProject/loginPage.php');
+header('Location: ../../Production/mainAnon.php');
 
 ?>

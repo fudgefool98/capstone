@@ -11,21 +11,20 @@ echo '<!-- NAV BAR -->
                     <li><a href="http://www.fandomdb.com/Production/fandoms.php" class="navWords"> <span class="glyphicon glyphicon-heart"></span>  Fandoms</a></li> 
                     <li><a href="http://www.fandomdb.com/Production/creators.php" class="navWords"> <span class="glyphicon glyphicon-user"></span>  Creators</a></li> ';
                     
-if(isset($SESSION['user'])){
+if(isset($_SESSION['user'])){
                               //this href needs to be set
     echo '<li><a href="#" class="navWords"> <span class="glyphicon glyphicon-edit"></span> Create a Post</a></li> ';
 }
                        
  echo '</ul> ';
                 
-if(isset($SESSION['user'])){
+if(isset($_SESSION['user'])){
 echo '<ul class="nav navbar-nav navbar-right"> 
-//        question
-          <li><a href="#" class="navWords"><span class="glyphicon glyphicon-user"></span>';
+          <li><a href="http://www.fandomdb.com/Production/userProfile.php" class="navWords"><span class="glyphicon glyphicon-user"></span>';
     echo $_SESSION['user'];
 
     echo '</a></li> 
-          <li><a href="http://www.fandomdb.com/Production/loginPage.php" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li> 
+          <li><a href="http://www.fandomdb.com/Production/logout.php" class="navWords"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li> 
           </ul> ';
     //still need to handle logout
 }

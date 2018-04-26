@@ -3,13 +3,15 @@
 session_start();
 //function postArticle(){
     require('../JordanPhp/db_credentials.php');
+    
     $link = new mysqli($servername, $username, $password, $dbname);
+    
     if($link -> connect_error) {
         die("Connection failed: " . $link->connect_error);
         return false;
     }
-    $email = $_SESSION['name'];
-    $userQuery = "SELECT userId FROM User WHERE email = '$email'";
+    $username = $_SESSION['user'];
+    $userQuery = "SELECT userId FROM User WHERE username = '$username'";
     
     $userResult = mysqli_query($link ,$userQuery) or die (mysqli_error($link));
   
@@ -27,6 +29,7 @@ session_start();
             //set fandom name to one selected from list of options
             $fandom = $_POST['oldFandom'];
         }
+    //article type = 1
     $type = 1;
     $title = $_POST['title'];
     $content = $_POST['article'];
@@ -34,33 +37,18 @@ session_start();
         $authorId = mysqli_fetch_row($userResult);
     }else{
         $_SESSION['articleErrorMessage'] = "There was an issue with the userId ln: 58 writeArticleService";
-        return 1;
     }
     $description = "Written article";
     $lastEdited = date("Y-m-d H:i:s");
+  
+    $insertArticleSql = "INSERT INTO Article (fandom, type, discription, title, content, authorID, lastEdited) VALUES('$fandom', '$type', '$description', '$title', '$content', '$authorId', '$lastEdited')";
     
-    $link = new mysqli($servername, $username, $password, $dbname);  
-    //$id = 12;
-
-      $insertArticleSql = "INSERT INTO Article (fandom, type, discription, title, content, authorID, lastEdited) VALUES('$fandom', '$type', '$description', '$title', '$content', '$authorId', '$lastEdited')";
-    
-      if($link->query($insertArticleSql) === TRUE){
+    if($link->query($insertArticleSql) === TRUE){
           //SUCCESS
-      }
+    }
     
-      mysqli_close($link);
+    mysqli_close($link);
     
     header('Location: writeArticle.php');
-//}
-
-//function createFandom(){
-//if new fandom is selected create fandom THEN create the article in the db
-
-    //pull fandom name and create the fandom
-    
-//    
-//    return $title;
-//    
-//}
 
 ?>
